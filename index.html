@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>은혜교회 | Grace Church</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 상단 미니멀 고정 헤더 -->
+  <header class="site-header">
+    <div class="nav-container">
+      
+      <!-- 좌측 앵커 로고타입 -->
+      <a href="index.html" class="brand-link">
+        <img src="logo.png" alt="은혜교회 로고" class="brand-logo" onerror="this.style.display='none'">
+        <span class="brand-title">은혜교회</span>
+      </a>
+
+      <!-- 모바일 햄버거 버튼 -->
+      <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- 아담한 플로팅 팝업 메뉴 -->
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-links">
+          <li><a href="confession.html">고백과 길</a></li>
+          <li><a href="index.html#pastor">목회자 소개</a></li>
+          <li><a href="sermons.html">주간 말씀</a></li>
+          <li><a href="https://www.youtube.com/channel/UC9nGAkJKbWEKLsc8grpdjNg" target="_blank" rel="noopener noreferrer" class="yt-link">명상과 밥상 ↗</a></li>
+          <li><a href="index.html#contact">오시는 길</a></li>
+        </ul>
+      </nav>
+
+      <!-- 바깥 영역 터치 시 닫기 레이어 -->
+      <div class="menu-overlay" id="menuOverlay"></div>
+
+    </div>
+  </header>
+
+  <!-- 메인 대문: 100dvh 풀스크린 히어로 -->
+  <section class="hero-fullscreen">
+    <div class="hero-content">
+      <div class="hero-badge-glow">
+        <span>✦</span> 우주적 질서(Astrologia)와 실존적 제자도
+      </div>
+      <h1>우주적 질서 안에서<br class="desktop-br"> 나만의 궤도를 회복하는 여정</h1>
+      <p>
+        박제된 교조주의를 벗고, 2000년 전 예수의 날 선 원초적 음성과 마주하며<br class="desktop-br">
+        내면의 신성과 고유한 뜻을 자각하는 영적 터전입니다.
+      </p>
+
+      <!-- [갱신] 여는 글 제0호 원클릭 슬림 티켓 -->
+      <div>
+        <a href="sermons.html#logia-0" class="weekly-ticket">
+          <span class="ticket-tag">여는 글 · 제0호</span>
+          <span class="ticket-title">복음이란 무엇인가: 교리를 넘어 실존적 평화로</span>
+          <span class="ticket-action">전문 읽기 &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 하단 스크롤 인디케이터 -->
+    <a href="#hub" class="scroll-indicator">
+      <span>Scroll Down</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- 메인 허브: 3개의 사각형 카드 -->
+  <section id="hub" class="hub-section">
+    <div class="hub-heading">
+      <h2>은혜교회의 세 가지 기둥</h2>
+      <p>원하시는 주제의 카드를 클릭하시면 정돈된 상세 내용을 확인하실 수 있습니다.</p>
+    </div>
+
+    <div class="hub-grid">
+      <!-- 1번 카드: 고백과 길 -->
+      <a href="confession.html" class="hub-card">
+        <div>
+          <div class="card-num">COLUMN 01</div>
+          <h3 class="card-title">고백과 길</h3>
+          <p class="card-desc">우주의 리듬과 실존의 무대, 나사렛 예수의 원초적 육성, 뜻의 흐름과 참된 내맡김에 대한 은혜교회의 고백입니다.</p>
+        </div>
+        <span class="card-link">선언문 전문 읽기 &rarr;</span>
+      </a>
+
+      <!-- 2번 카드: 주간 말씀 -->
+      <a href="sermons.html" class="hub-card">
+        <div>
+          <div class="card-num">COLUMN 02</div>
+          <h3 class="card-title">주간 말씀</h3>
+          <p class="card-desc">예수 세미나에서 확증된 88개 오리지널 어록(Logia)을 2026년 오늘 우리의 실존에 비추어 새롭게 해석합니다.</p>
+        </div>
+        <span class="card-link">어록 아카이브 가기 &rarr;</span>
+      </a>
+
+      <!-- 3번 카드: 명상과 밥상 (유튜브 비목ch 연동) -->
+      <a href="https://www.youtube.com/channel/UC9nGAkJKbWEKLsc8grpdjNg" target="_blank" rel="noopener noreferrer" class="hub-card">
+        <div>
+          <div class="card-num">COLUMN 03 &bull; YOUTUBE</div>
+          <h3 class="card-title">명상과 밥상</h3>
+          <p class="card-desc">영혼의 양식인 깊은 명상과 육신의 양식인 따뜻한 밥상. '비목(비주류 목사)ch' 영상을 통해 일상 속 영적 자각과 생명의 길을 나눕니다.</p>
+        </div>
+        <span class="card-link" style="color: #e11d48;">비목ch 영상 보러가기 &nearr;</span>
+      </a>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- [아코디언 토글 1] 목회자 소개 -->
+    <div class="accordion-wrapper">
+      <details id="pastor" class="accordion-item">
+        <summary class="accordion-header">
+          <div class="accordion-title-wrap">
+            <span class="accordion-title">목회자 소개</span>
+            <span class="accordion-sub">Rev. Ji-Ho Shin, Ph.D.</span>
+          </div>
+          <span class="accordion-icon">+</span>
+        </summary>
+        <div class="accordion-content">
+          <div class="profile-card">
+            <div class="profile-name">
+              신지호 목사 <span>Rev. Ji-Ho Shin, Ph.D.</span>
+            </div>
+            <ul class="profile-list" style="line-height: 2;">
+              <li>&bull; 한국기독교장로회 (The Presbyterian Church in the Republic of Korea)</li>
+              <li>&bull; 한신대학교 신학과 및 동 신학대학원 (M.Div.)</li>
+              <li>&bull; 평택대학교 피어선신학전문대학원 상담학 박사 (Ph.D.)</li>
+              <li>&bull; <strong>연구분야 :</strong> 반려동물 상실 경험과 반려인의 핵심감정 (질적연구·내러티브 탐구)</li>
+              <li>&bull; <strong>사역 및 관심 :</strong> 실존적 예수 제자도, 우주적 질서(Astrologia), 뜻 중심 상담(TCC)</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- [아코디언 토글 2] 오시는 길 및 안내 -->
+    <div class="accordion-wrapper">
+      <details id="contact" class="accordion-item">
+        <summary class="accordion-header">
+          <div class="accordion-title-wrap">
+            <span class="accordion-title">오시는 길 및 안내</span>
+            <span class="accordion-sub">원주시 무실동 위너스빌딩 501호</span>
+          </div>
+          <span class="accordion-icon">+</span>
+        </summary>
+        <div class="accordion-content">
+          <div class="location-grid">
+            
+            <div class="location-item">
+              <h4>주소 및 위치</h4>
+              <p><strong>• 도로명 주소 :</strong> 강원특별자치도 원주시 능라동길 37, 위너스빌딩 5층 501호</p>
+              <p><strong>• 지번 주소 :</strong> 강원특별자치도 원주시 무실동 1857-7</p>
+              <p style="margin-top: 6px; color: var(--text-muted); font-size: 0.93rem;">
+                * 무실동 상업지구 메인 스트리트에 위치해 있으며, 1층 엘리베이터를 이용하여 5층 501호로 올라오시면 됩니다.
+              </p>
+            </div>
+
+            <div class="location-item">
+              <h4>대중교통 안내</h4>
+              <ul>
+                <li><strong>원주시외·고속버스터미널 방면 :</strong> 택시 이용 시 약 7~10분 소요. 시내버스 탑승 시 '무실주공8단지' 또는 '법원·검찰청' 인근 정류장 하차 후 도보 3~5분</li>
+                <li><strong>KTX 원주역 방면 :</strong> 택시 이용 시 약 6~8분 소요. 원주역 광장에서 무실동 중심상가 방향 버스 이용 가능</li>
+              </ul>
+            </div>
+
+            <div class="location-item">
+              <h4>자가용 및 주차 안내</h4>
+              <ul>
+                <li><strong>남원주 IC 진입 시 :</strong> 고속도로 톨게이트에서 무실동 방면으로 직진하여 차량 5분 거리</li>
+                <li><strong>건물 주차 :</strong> 위너스빌딩 지하 주차장 이용 가능</li>
+                <li><strong>주변 주차 팁 :</strong> 일요일 오전에는 인근 공영주차장, 노상 주차구획 및 이면도로 주차가 수월합니다.</li>
+              </ul>
+            </div>
+
+            <div class="location-item">
+              <h4>모임 일시 및 참여 안내</h4>
+              <p><strong>• 일요 모임 :</strong> 매주 일요일 오전 11:00 (1부 명상 예식 & 2부 열린 식탁 교제)</p>
+              <p><strong>• 문의 이메일 :</strong> lightnlovejh@gmail.com</p>
+              <p style="margin-top: 8px; font-size: 0.92rem; color: var(--text-muted); background: #f8fafc; padding: 12px 16px; border-radius: 6px;">
+                은혜교회의 모든 모임은 사전 등록이나 복장 규정 없이 누구나 편안하게 참여하실 수 있는 열린 공간입니다. 5층 501호 문이 열려 있으니 편안하게 들어오십시오.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </details>
+    </div>
+
+  </main>
+
+  <!-- 하단 카피라이트 -->
+  <footer>
+    <p>&copy; 2026 은혜교회 (Grace Church). All rights reserved.</p>
+    <p style="margin-top: 4px; font-size: 0.8rem;">한국기독교장로회 | The Presbyterian Church in the Republic of Korea</p>
+  </footer>
+
+  <!-- 미니 팝업 토글 및 아코디언 스크립트 -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const menuToggle = document.getElementById("menuToggle");
+      const navMenu = document.getElementById("navMenu");
+      const menuOverlay = document.getElementById("menuOverlay");
+
+      function toggleMenu(e) {
+        e.stopPropagation();
+        const isOpen = navMenu.classList.contains("open");
+        if (isOpen) {
+          navMenu.classList.remove("open");
+          menuOverlay.classList.remove("active");
+        } else {
+          navMenu.classList.add("open");
+          menuOverlay.classList.add("active");
+        }
+      }
+
+      function closeMenu() {
+        navMenu.classList.remove("open");
+        menuOverlay.classList.remove("active");
+      }
+
+      if (menuToggle) menuToggle.addEventListener("click", toggleMenu);
+      if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
+
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+      });
+    });
+
+    function checkHashAndOpen() {
+      const hash = window.location.hash;
+      if (hash) {
+        const target = document.querySelector(hash);
+        if (target && target.tagName === 'DETAILS') {
+          target.open = true;
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', checkHashAndOpen);
+    window.addEventListener('hashchange', checkHashAndOpen);
+  </script>
+</body>
+</html>

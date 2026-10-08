@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>명상과 밥상 (모임 안내) | 은혜교회</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 상단 고정 헤더 -->
+  <header class="site-header">
+    <div class="nav-container">
+      <div class="brand">
+        <!-- 1행: 로고와 은혜교회 -->
+        <a href="index.html" class="brand-top">
+          <img src="logo.png" alt="은혜교회 로고" onerror="this.style.display='none'">
+          <span class="church-name">은혜교회</span>
+        </a>
+        <!-- 구분선 -->
+        <div class="brand-divider"></div>
+        <!-- 2행: 한글 교단명 -->
+        <div class="denomination-ko">
+          <span>한</span><span>국</span><span>기</span><span>독</span><span>교</span><span>장</span><span>로</span><span>회</span>
+        </div>
+        <!-- 3행: 영문 교단명 -->
+        <div class="denomination-en">
+          The Presbyterian Church in the Republic of Korea
+        </div>
+      </div>
+      <!-- 우측 상단 내비게이션 (목회자 소개 2번째 배치) -->
+      <nav>
+        <ul>
+          <li><a href="confession.html">고백과 길</a></li>
+          <li><a href="index.html#pastor">목회자 소개</a></li>
+          <li><a href="sermons.html">주간 말씀</a></li>
+          <li><a href="https://www.youtube.com/channel/UC9nGAkJKbWEKLsc8grpdjNg" target="_blank" rel="noopener noreferrer">명상과 밥상</a></li>
+          <li><a href="index.html#contact">오시는 길</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="subpage-hero reveal">
+    <h1>예식과 나눔: 명상과 밥상</h1>
+    <p>단순하고 정직한 예식을 통해 내면을 비우고, 서로의 삶을 환대합니다.</p>
+  </div>
+
+  <main>
+    <section class="reveal">
+      <h2 class="section-title">일요 모임 순서 및 안내</h2>
+      <p style="margin-bottom: 24px;">은혜교회는 화려한 프로그램이나 인위적인 감정 고양을 지양합니다. 고요 속에 머물고 밥상을 함께 나눕니다.</p>
+
+      <div class="schedule-grid">
+        <div class="schedule-item">
+          <h4>1부: 명상(침묵)과 주기도문 (오전 11:00)</h4>
+          <p>퀘이커와 떼제 전통의 고요한 침묵 속에 머뭅니다. 호흡과 긴장을 내려놓고 의식을 비켜 세워 참된 나와 마주한 뒤, 예수께서 가르쳐 주신 주기도문을 다 함께 낭독합니다.</p>
+        </div>
+        <div class="schedule-item">
+          <h4>2부: 열린 식탁 교제 (밥상) (오후 12:00)</h4>
+          <p>초대교회의 원형대로 신분과 격식을 넘어 따뜻한 밥을 함께 먹습니다. 밥상 위에서 서로의 일상과 상처, 삶의 내러티브를 가감 없이 나눕니다.</p>
+        </div>
+      </div>
+
+      <!-- 유튜브 비목ch 배너 -->
+      <div style="margin-top: 30px; padding: 24px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 10px; text-align: center;">
+        <h4 style="color: #e11d48; font-size: 1.15rem; margin-bottom: 8px;">비목(비주류 목사)ch 유튜브 영상 보기</h4>
+        <p style="color: #666; font-size: 0.95rem; margin-bottom: 16px;">영혼의 양식인 깊은 명상과 예수의 실존적 제자도를 영상으로 나눕니다.</p>
+        <a href="https://www.youtube.com/channel/UC9nGAkJKbWEKLsc8grpdjNg" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 12px 28px; background: #e11d48; color: #fff; border-radius: 30px; font-weight: 700; text-decoration: none;">비목ch 바로가기 &nearr;</a>
+      </div>
+
+      <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" style="display: inline-block; padding: 10px 24px; background: #f0f4f8; border-radius: 6px; font-weight: 600; font-size: 0.95rem;">&larr; 메인 화면으로 돌아가기</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- 하단 카피라이트 -->
+  <footer>
+    <p>&copy; 2026 은혜교회 (Grace Church). All rights reserved.</p>
+    <p style="margin-top: 4px; font-size: 0.8rem;">한국기독교장로회 | The Presbyterian Church in the Republic of Korea</p>
+  </footer>
+
+  <!-- 스크롤 페이드인 인터랙션 스크립트 -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: "0px 0px -40px 0px"
+      });
+
+      document.querySelectorAll(".reveal").forEach((el) => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>
