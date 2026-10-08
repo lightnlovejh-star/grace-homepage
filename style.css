@@ -891,3 +891,67 @@ details[open] summary .accordion-icon {
   40% { transform: translate(-50%, -8px); }
   60% { transform: translate(-50%, -4px); }
 }
+/* 자발적 화답: 나눔 계좌 카드 */
+.reciprocity-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.reciprocity-card p {
+  margin: 0;
+}
+
+.reciprocity-intro {
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.85;
+  color: #1f2937;
+}
+
+.giving-account {
+  margin: 6px 0 2px;
+  padding: 24px 22px;
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 158, 226, 0.08),
+    rgba(123, 31, 162, 0.08)
+  );
+  border: 1px solid rgba(0, 158, 226, 0.20);
+  border-radius: 12px;
+}
+
+.giving-label {
+  margin-bottom: 8px !important;
+  color: var(--primary-purple);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.giving-bank {
+  color: #374151;
+  font-size: 0.96rem;
+  font-weight: 600;
+}
+
+.giving-number {
+  margin: 4px 0 !important;
+  color: #111827;
+  font-size: clamp(1.25rem, 4vw, 1.55rem);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  word-break: break-all;
+}
+
+.giving-owner {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.reciprocity-note {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.75;
+}
