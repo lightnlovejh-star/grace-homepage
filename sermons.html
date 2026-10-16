@@ -6,7 +6,7 @@
   <title>주간 말씀 (88 Logia) | 은혜교회</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* 제0호 프롤로그 매거진 에디토리얼 전용 스타일 */
+    /* 매거진 에디토리얼 말씀 카드 전용 스타일 */
     .prologue-card {
       border: 1px solid rgba(123, 31, 162, 0.22);
       border-top: 5px solid var(--primary-purple);
@@ -15,6 +15,11 @@
       padding: 40px 32px;
       margin-bottom: 38px;
       box-shadow: 0 6px 24px rgba(123, 31, 162, 0.04);
+      scroll-margin-top: 84px;
+    }
+    .prologue-card.logia-regular {
+      border: 1px solid var(--border-color);
+      border-top: 4px solid var(--primary-blue);
     }
     .prologue-badge {
       display: inline-block;
@@ -27,8 +32,12 @@
       margin-bottom: 14px;
       letter-spacing: 0.5px;
     }
+    .prologue-card.logia-regular .prologue-badge {
+      background: rgba(0, 158, 226, 0.1);
+      color: var(--primary-blue);
+    }
     .prologue-title {
-      font-size: clamp(1.4rem, 4vw, 1.85rem);
+      font-size: clamp(1.35rem, 4vw, 1.82rem);
       font-weight: 800;
       color: #111827;
       line-height: 1.4;
@@ -38,7 +47,7 @@
     .prologue-subtitle {
       font-size: 1rem;
       color: var(--text-muted);
-      margin-bottom: 26px;
+      margin-bottom: 24px;
       font-weight: 500;
     }
     .scripture-box {
@@ -46,24 +55,40 @@
       border-left: 3px solid var(--primary-purple);
       padding: 16px 20px;
       border-radius: 6px;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
       font-style: normal;
       font-size: 0.96rem;
       line-height: 1.85;
       color: #334155;
     }
+    .prologue-card.logia-regular .scripture-box {
+      background: #f8fafc;
+      border-left: 4px solid var(--primary-blue);
+    }
+    .scripture-box p {
+      margin-bottom: 6px;
+    }
+    .scripture-box p:last-child {
+      margin-bottom: 0;
+    }
     .prologue-section {
-      margin-bottom: 30px;
+      margin-bottom: 26px;
+    }
+    .prologue-section:last-child {
+      margin-bottom: 0;
     }
     .prologue-section h4 {
       font-size: 1.18rem;
       color: #111827;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin: 28px 0 12px;
       display: flex;
       align-items: center;
       gap: 8px;
       letter-spacing: -0.3px;
+    }
+    .prologue-section h4:first-child {
+      margin-top: 0;
     }
     .prologue-section h4::before {
       content: "";
@@ -72,6 +97,7 @@
       height: 18px;
       background: var(--primary-purple);
       border-radius: 3px;
+      flex-shrink: 0;
     }
     .prologue-section p {
       font-size: 0.98rem;
@@ -90,6 +116,14 @@
       color: #475569;
       line-height: 1.85;
     }
+    .quote-box p {
+      margin-bottom: 8px;
+      font-size: 0.94rem;
+      color: #475569;
+    }
+    .quote-box p:last-child {
+      margin-bottom: 0;
+    }
     .quote-box strong {
       color: #0f172a;
     }
@@ -103,6 +137,100 @@
       line-height: 1.85;
       color: #0369a1;
     }
+
+    /* 상단 게시판 아카이브 목차 보드 */
+    .board-directory {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+    }
+    .board-dir-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .board-dir-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: #111827;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .board-dir-count {
+      font-size: 0.8rem;
+      color: var(--primary-purple);
+      font-weight: 700;
+      background: rgba(123, 31, 162, 0.08);
+      padding: 2px 10px;
+      border-radius: 12px;
+    }
+    .board-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+    .board-list li a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      color: #374151;
+      transition: all 0.15s ease;
+      background: #fbfbfd;
+    }
+    .board-list li a:hover {
+      background: rgba(0, 158, 226, 0.07);
+      color: var(--primary-blue);
+      font-weight: 600;
+    }
+    .board-item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow: hidden;
+    }
+    .board-item-badge {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--primary-purple);
+      background: rgba(123, 31, 162, 0.08);
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .board-item-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .board-item-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      margin-left: 12px;
+      flex-shrink: 0;
+    }
+    .sync-status {
+      text-align: right;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: -18px;
+      margin-bottom: 16px;
+    }
+
     @media (max-width: 768px) {
       .prologue-card {
         padding: 24px 18px;
@@ -115,6 +243,12 @@
         font-size: 0.94rem;
         text-align: left;
       }
+      .board-directory {
+        padding: 16px;
+      }
+      .board-item-date {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -123,21 +257,17 @@
   <!-- 상단 미니멀 고정 헤더 -->
   <header class="site-header">
     <div class="nav-container">
-      
-      <!-- 좌측 앵커 로고타입 -->
       <a href="index.html" class="brand-link">
         <img src="logo.png" alt="은혜교회 로고" class="brand-logo" onerror="this.style.display='none'">
         <span class="brand-title">은혜교회</span>
       </a>
 
-      <!-- 모바일 햄버거 버튼 -->
       <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기">
         <span></span>
         <span></span>
         <span></span>
       </button>
 
-      <!-- 아담한 플로팅 팝업 메뉴 -->
       <nav class="nav-menu" id="navMenu">
         <ul class="nav-links">
           <li><a href="confession.html">고백과 여정</a></li>
@@ -149,13 +279,11 @@
         </ul>
       </nav>
 
-      <!-- 바깥 영역 터치 시 닫기 레이어 -->
       <div class="menu-overlay" id="menuOverlay"></div>
-
     </div>
   </header>
 
-  <!-- [복원] 품격 있는 중앙 정렬 서브페이지 헤더 -->
+  <!-- 서브페이지 헤더 -->
   <div class="subpage-hero">
     <div class="subpage-badge">COLUMN 02 &bull; 88 LOGIA ARCHIVE</div>
     <h1>주간 말씀: 88개 오리지널 어록</h1>
@@ -164,222 +292,325 @@
 
   <main>
 
-    <!-- ========================================================
-         [제0호 어록 강론 전문: 프롤로그 선언문]
-         ======================================================== -->
-    <article class="prologue-card" id="logia-0">
-      <span class="prologue-badge">주간 말씀 제0호 | FOUNDATIONAL PROLOGUE</span>
-      <h2 class="prologue-title">복음이란 무엇인가: 교리를 넘어 실존적 평화로</h2>
-      <div class="prologue-subtitle">— 88개 오리지널 어록(Logia) 강론을 시작하며</div>
-
-      <!-- 본문 말씀 -->
-      <div class="scripture-box">
-        <p><strong>• 마가복음 1:15 :</strong> "때가 찼고 하나님 나라가 가까이 왔으니 회개하고 복음을 믿으라."</p>
-        <p><strong>• 마가복음 5:34 :</strong> "예수께서 이르시되 딸아 네 믿음이 너를 구원하였으니 평안히 가라."</p>
+    <!-- [자동 생성] 어록 게시판 빠른 목차 -->
+    <div class="board-directory" id="boardDirectory">
+      <div class="board-dir-header">
+        <div class="board-dir-title">📖 88 어록 강론 아카이브 목차</div>
+        <span class="board-dir-count" id="postCount">수록 말씀 2편</span>
       </div>
-
-      <!-- 1장 -->
-      <div class="prologue-section">
-        <h4>1. 복음의 본질 : 예수께서 직접 선포하신 '말씀의 사건'</h4>
-        <p>
-          우리는 흔히 '복음(福音)'을 '기쁜 소식(Good News)'으로 이해합니다. 잘못된 표현은 아니지만, 한자의 결을 가만히 짚어보면 그것은 '복 복(福)' 자에 '소리 음(音)' 자입니다. 복된 소식을 넘어, 예수께서 인간의 실존을 향해 직접 발하신 '복된 음성'의 뉘앙스를 품고 있습니다.
-        </p>
-        <p>
-          신약성서의 원어인 헬라어 에우앙겔리온(εὐαγγέλιον)의 본뜻은 '복된 소식'입니다. 본래 고대 로마 제국에서 황제의 탄생이나 전쟁의 결정적 승리를 전령이 공포하던 제국의 정치적 용어였습니다. 초대교회는 이 제국의 언어를 과감히 전유했습니다. 로마 황제가 아닌 나사렛 예수가 온 세상의 진정한 승리자이자 해방자임을 선포함으로써, 예수의 십자가와 부활 사건을 제국의 권세를 뛰어넘는 우주적 승리로 격상시킨 것입니다.
-        </p>
-        <p>
-          그러나 역사적 예수 본인의 사역은 황제의 권좌에서 하달된 위압적인 포고문이 아니었습니다. 예수께서는 갈릴리의 가난한 자, 눈먼 자, 율법의 낙인이 찍힌 이들과 눈을 마주치며 인간의 실존을 마주하셨습니다. 그 현장에서 건네신 한마디 한마디는 듣는 이의 굳은 자아를 깨부수고 세계를 다시 보게 만드는 살아 숨 쉬는 <strong>'말씀의 사건(Sprachereignis)'</strong>이었습니다. 
-        </p>
-        <p>
-          따라서 복음은 제국의 언어로 격상되어 성경이라는 책 속에 갇힌 도그마로 끝나지 않습니다. 그것은 거대한 포고문을 넘어, 2천 년 전 갈릴리에서 울려 퍼졌던 예수의 원초적 육성이 오늘 나의 상처와 실존에 정면으로 부딪쳐오는 생생한 사건의 현장입니다.
-        </p>
-      </div>
-
-      <!-- 2장 -->
-      <div class="prologue-section">
-        <h4>2. 해석자 바울의 빛과 그림자: 교리화의 이면과 치열했던 목회적 실존</h4>
-        <p>
-          기독교 역사 속에서 복음은 점차 "예수께서 우리 죄를 대신해 십자가에 죽으시고 부활하심으로 사후 천국을 얻게 되었다"는 교리적 공식으로 환원되었습니다. 이러한 구속론적 체계화를 주도한 인물은 사도 바울이었습니다. 바울은 예수를 생전에 육신으로 직접 만나지 못했던 인물입니다. 그는 다메섹 체험 이후 자신에게 들려온 예수 사건을 헬레니즘적 사유와 묵시문학적 틀로 풀어낸 '탁월한 2차 해석자'였습니다.
-        </p>
-        <p>
-          훗날 4세기 로마 제국이 기독교를 공인하고 신약을 정경화(Canonization)하는 과정에서 바울 서신들이 대거 채택된 데는 분명한 '제국의 통치 논리'가 맞물려 있었습니다. 기득권 체제를 뒤흔들었던 갈릴리 예수의 급진적 삶의 양식보다는, "위에 있는 권세들에게 복종하라"(롬 13:1), "종들아 상전에게 순종하라"(엡 6:5)며 사회 질서를 안정시키고 내면의 죄책감과 사후 구원에 집중하게 만드는 바울의 체계화된 교리가 제국과 교단 권력에게 훨씬 유용했기 때문입니다.
-        </p>
-        <p>
-          <strong>그러나 우리는 바울을 결코 일방적으로 매도할 수 없습니다.</strong> 바울의 서신들은 상아탑의 사변이 아니라, 지극히 현실적인 인간 군상의 갈등과 위기 속에서 탄생한 피와 땀의 기록이기 때문입니다. 당시 고린도나 갈라디아 교회는 파당 싸움, 빈부 격차에 따른 차별, 비교와 시기로 날마다 깨어지고 있었습니다. 2000년 전이나 2026년 오늘이나, 인간이 모인 자리는 늘 다툼과 불안으로 요동칩니다. 바울은 바로 그 깨어진 인간 현실 속에서 교회를 화해시키고 성도들을 품어 안기 위해 처절하게 고투했던 위대한 목회자였습니다.
-        </p>
-        <p>
-          그렇기에 그의 편지 속에는 시대를 초월하여 영혼을 울리는 주옥같은 실존적 통찰들이 빛나고 있습니다.
-        </p>
-
-        <div class="quote-box">
-          <p><strong>• 고린도후서 12:9 :</strong> "내 은혜가 네게 족하도다 이는 내 능력이 약한 데서 온전하여짐이라. 내가 약한 그 때에 강함이라." — 결핍과 상처가 오히려 하늘의 은혜가 머무는 통로가 됨을 꿰뚫어 본 고백.</p>
-          <p><strong>• 갈라디아서 3:28 :</strong> "유대인이나 헬라인이나 종이나 자유인이나 남자나 여자나 다 그리스도 예수 안에서 하나이니라." — 당대의 견고한 신분과 성별의 벽을 허물어버린 급진적 평등과 화해의 선언.</p>
-          <p><strong>• 빌립보서 4:6-7 :</strong> "아무것도 염려하지 말고... 모든 지각에 뛰어난 하나님의 평강이 너희 마음과 생각을 지키시리라." — 불안에 떠는 영혼을 향한 평안의 축복.</p>
-        </div>
-
-        <p>
-          바울의 세계관은 갈등 많은 현실을 살아가는 우리에게 여전히 소중한 목회적 지혜를 줍니다. 다만 우리는 바울이 처했던 특정 교회의 '상황적 권면'과, 그 모든 것의 원천이자 샘물이었던 '나사렛 예수 자신의 원초적 육성'을 분별하여, 이제 물줄기의 발원지로 거슬러 올라가고자 하는 것입니다.
-        </p>
-      </div>
-
-      <!-- 3장 -->
-      <div class="prologue-section">
-        <h4>3. 예수의 육성: 예수 세미나와 5대 복음서</h4>
-        <p>
-          이것이 은혜교회가 현대 신약학의 가장 정직한 결실인 '예수 세미나(Jesus Seminar)'의 오리지널 어록(Logia)에서 출발하는 이유입니다. 1985년 로버트 펑크(Robert Funk)와 존 도미닉 크로산(John Dominic Crossan)을 필두로 모인 200여 명의 세계적 성서학자들은 기독교 역사상 가장 방대한 문헌 비평 작업을 감행했습니다.
-        </p>
-        <p>
-          특히 예수 세미나는 정경 4복음서(마태, 마가, 누가, 요한)에만 갇히지 않고, 1945년 이집트 나그함마디에서 발굴된 '도마복음(Gospel of Thomas)'을 대등한 원천 텍스트로 포함하여 '5대 복음서(The Five Gospels)'를 검토했습니다. 도마복음은 후대 교회의 신학적 각색이나 기적 이야기, 사후 묵시록적 드라마가 전혀 없이, 오직 114개의 예수 말씀만 앙상하게 보존된 가장 원초적인 '어록집(Sayings Gospel)'이었습니다.
-        </p>
-        <p>
-          학자들은 엄격한 역사비평 투표를 통해 후대 교회가 체제 유지를 위해 예수의 입을 빌려 창작해 넣은 수많은 덧칠을 걷어냈습니다. 그리고 5대 복음서 전체에 걸쳐 나사렛 예수께서 실제로 말씀하셨을 확률이 가장 확실한 약 18%의 진정 어록을 확증했습니다.
-        </p>
-
-        <div class="constellation-highlight">
-          저는 5대 복음서에 흩어져 있던 평행본문과 중복 구절들을 하나로 묶어 담담히 정리했습니다. 그렇게 겹치는 구절들을 추려내고 묶었더니 꼭 88개의 어록이 되었습니다.<br><br>
-          개인적으로는 이 숫자가 온 밤하늘을 이루는 공식 88개 별자리(성좌)의 수와 꼭 같다는 사실이 무척 놀라웠고, 제게는 참으로 남다른 경이로움과 깊은 울림으로 다가왔습니다. 하늘의 별자리가 길 잃은 나그네의 밤길을 밝혀주는 길잡이가 되어주듯, 이 88개의 어록은 박제된 교리가 아니라 우리 영혼의 어둠을 걷어내고 참된 평화의 길을 비추어주는 살아 있는 별빛들입니다.
-        </div>
-
-        <p>
-          그 88개의 어록 속 예수는 자신을 제물로 바치라고 요구하지도, 사후 천국을 미끼로 교회를 키우려 하지도 않습니다. 2000년 전이나 오늘이나, 상처와 두려움에 짓눌려 허덕이는 인간의 자아를 깨부수고 자유케 하는 명징한 하나님 나라의 현실을 선포할 뿐입니다.
-        </p>
-      </div>
-
-      <!-- 4장 -->
-      <div class="prologue-section">
-        <h4>4. "네 믿음이 너를 구원했다": 수동적 피구속에서 주체적 신뢰로</h4>
-        <p>
-          전통 교리는 예수를 영웅적 초월자로 이상화하고, 인간을 무기력하게 피 흘림만 바라보는 수동적 죄인으로 규정했습니다. 그러나 복음서 속 예수는 기적의 시혜(施惠)만을 바라며 몰려든 군중 앞에서 결코 영웅 행세를 하지 않으셨습니다. 그는 구원의 본질을 짚어내며 이렇게 선언하셨습니다.
-        </p>
-        <div class="scripture-box" style="margin-bottom: 14px;">
-          "네 믿음이 너를 구원하였다. 평안히 가라." (마가복음 5:34)
-        </div>
-        <p>
-          구원은 부흥회의 고조된 열기 속에서 손을 번쩍 들고 "확신한다"고 외칠 때 손에 쥐어지는 심리적 면죄부가 아닙니다. 그것은 외부의 누군가가 일방적으로 주입하는 마법적 시혜도 아닙니다. 구원은 예수의 깨어 있는 음성을 마주한 한 인간이, 내면의 두려움과 거짓 자아를 내려놓고 생명의 근원을 온전히 신뢰하기로 돌아설 때 일어나는 <strong>'주체적 믿음의 내적 회복 사건'</strong>입니다. 
-        </p>
-        <p>
-          결국 구원의 핵심은 그 선언 끝에 붙은 마지막 말씀처럼, 과연 내가 '평안히 갈 수 있는가'에 달려 있습니다. "평안히 가라"는 예수의 선언 앞에 온 존재로 "예"라고 응답하며 걸어 나아가는 주체는 바로 '나'이기 때문입니다. 그 부름에 스스로 "예"라고 답할 수 있는 주체적 신뢰를 통해, 두려움을 떨치고 자기 삶의 길로 평안히 걸어 나아가는 것, 그것이 곧 구원입니다.
-        </p>
-      </div>
-
-      <!-- 5장 -->
-      <div class="prologue-section">
-        <h4>5. 삶의 양식(Life-style)의 전환과 궁극적 종착지: '마음의 평화'</h4>
-        <p>
-          따라서 복음과 구원은 분리될 수 없습니다. 복음은 먼 훗날의 약속이 아니라, 지금 발 딛고 선 현실에서 내가 '더 나은 상태, 온전한 존재'로 변화되는 실존적 구원입니다.
-        </p>
-        <p>
-          이를 개인심리학자 알프레드 아들러(Alfred Adler)의 언어로 바꾸어 말하면, 곧 <strong>'삶의 양식(Life-style)의 근본적 전환'</strong>입니다. 당대 사람들은 로마의 정치적 압제와 종교 기득권층이 씌운 율법주의적 낙인 속에서, 조건을 충족해야만 존재 가치를 인정받을 수 있다는 병리적 삶의 양식에 갇혀 극심한 불안과 만성적 죄책감에 시달리고 있었습니다.
-        </p>
-        <p>
-          예수께서는 그 현장에 뛰어들어 당대가 씌운 저주의 낙인을 부수고, 하나님 안에서 우리는 이미 온전히 용납되었으며, 방향의 어긋남(하마르티아, 죄)이 있었을 뿐 결코 버려진 죄인이 아님을 자각시켰습니다. 이것이 예수께서 일으킨 삶의 양식의 혁명입니다.
-        </p>
-        <p>
-          그렇게 변화된 삶의 양식 끝에 피어나는 궁극적 열매는 <strong>자유, 평화, 사랑</strong>입니다. 그러나 내면의 평화가 결여된 사랑은 자칫 "더 사랑해야만 한다"는 가혹한 율법이자 도덕적 억압이 될 뿐입니다. 그렇기에 복음이 도달하는 가장 구체적이고 검증 가능한 실존적 알맹이는 바로 '평화(마음의 평안)'입니다.
-        </p>
-        <div class="scripture-box" style="margin-bottom: 14px;">
-          "평안을 너희에게 끼치노니 곧 나의 평안을 너희에게 주노라. 세상이 주는 것과 같지 아니하니라. 너희는 마음에 근심하지도 말고 두려워하지도 말라." (요한복음 14:27)
-        </div>
-        <p>
-          예수의 평화가 세상이 주는 것과 다른 이유는, 그것이 외부의 조건으로 주어지는 위안이 아니라 내면의 근심과 두려움을 스스로 내려놓을 때 깨어나는 실존의 힘이기 때문입니다. 병든 자의 손을 잡으실 때나 제자들에게 마지막 작별을 건네실 때나, 예수께서 전하고자 하셨던 단 하나의 진심은 <strong>"네 마음속에 진짜 평화가 있기를"</strong> 바라는 것이었습니다. 온갖 세상의 불안과 비교, 통제하려는 에고의 계산기를 내려놓고 내면의 가장 깊은 고요와 평안을 회복하는 것, 이것이 복음의 완성입니다.
-        </p>
-      </div>
-
-      <!-- 6장 -->
-      <div class="prologue-section">
-        <h4>6. 텍스트를 넘어선 실천: 명상과 '명상 노트'</h4>
-        <p>
-          은혜교회는 말씀을 교리로 암기하거나 머릿속 지식으로만 붙드는 곳이 아닙니다. 예수의 말씀이 오늘 나의 일상과 무의식 깊은 곳에 닿아 실존적 평안을 일으키기 위해, 우리는 '명상'과 '명상 노트'라는 구체적인 훈련을 함께합니다.
-        </p>
-        <p>
-          <strong>여기서 우리가 추구하는 명상은 가만히 눈을 감고 앉아 있는 시간에만 머물지 않습니다.</strong> 고요히 호흡을 가라앉힐 때뿐만 아니라, 설거지나 샤워, 운전처럼 몸에 익은 편안한 일상을 이어갈 때도 우리는 명상의 감각을 경험하곤 합니다. 의식이 굳이 애쓰지 않아도 되는 그러한 순간에 일상의 의식은 자연스럽게 옆으로 비켜서고, 그 틈을 타 평소에는 닫혀 있던 무의식의 문이 열리기 때문입니다.
-        </p>
-        <p>
-          의식이 비켜선 그 자리에서는 억압되어 있던 감정이나 잊고 있던 기억, 혹은 전혀 예상치 못한 깊은 통찰들이 수면 위로 떠오릅니다. 다만 무의식이 열렸다고 해서 그 안에서 올라오는 모든 것을 곧장 성령의 음성이나 신성한 계시로 동일시해서는 안 됩니다. 무의식은 깊은 지혜와 생명의 불씨뿐만 아니라, 아직 소화되지 않은 상처와 두려움, 본능적 욕망이 분별되지 않은 채 뒤섞여 있는 날것의 심리적 영토이기 때문입니다.
-        </p>
-        <p>
-          중요한 것은 이 무의식의 영역이 열렸을 때 일어나는 <strong>'바른 분별과 조율'</strong>입니다. 말씀의 빛 아래 날것의 무의식을 정직하게 마주할 때, 묵혀 있던 감정의 응어리는 안전한 출구를 찾아 해소되고 방어기제 너머에 있던 생명의 생각이 길어 올려집니다. 무의식 그 자체를 맹신하는 것이 아니라, 열린 무의식의 심연을 예수의 말씀에 비추어 치유하고 삶의 궤도를 새롭게 조율해 나가는 이 역동적인 과정—그것이 바로 우리가 고백하는 참된 <strong>'성령의 인도하심'</strong>입니다.
-        </p>
-        <p>
-          그렇기에 우리는 막연한 침묵이나 감상에 머물러 있지 않습니다. 의식이 비켜서며 드러난 날것의 감정과 생각들, 그리고 그것이 말씀과 만나 조율되며 일어나는 내면의 통찰을 <strong>즉각적으로 포착하여 '명상 노트'에 적어 내려갑니다.</strong> 말과 글로 솔직하게 꺼내어 눈으로 확인하고 직면하는 깨어 있는 훈련입니다.
-        </p>
-        <p>
-          목회자인 저 자신 역시 매일 이 명상 노트를 쓰며 내면의 파동을 살피고, 성령의 바른 조명 아래 삶의 궤도를 다듬어가고 있습니다. 은혜교회는 각 사람이 삶의 자리에서 자신의 내면을 투명하게 마주하고, 성령의 인도와 분별을 힘입어 자신만의 명상 노트를 채워가며 영적으로 온전히 자립할 수 있도록 돕는 열린 공동체입니다.
-        </p>
-      </div>
-
-      <!-- 맺음말 -->
-      <div class="prologue-section" style="margin-bottom: 0;">
-        <h4>맺음말: 은혜교회가 함께 걸어갈 88개의 길</h4>
-        <p>
-          이제 우리는 예수 세미나가 복원해 낸 88개의 오리지널 어록을 매주 하나씩 열어젖힙니다. 2000년 전 갈릴리 사람들의 억압을 부수었던 그 날 선 육성이, 2026년 오늘 불안한 시대를 살아가는 우리 각자의 내면에 어떻게 참된 자유와 평화를 꽃피워내는지, 이 아름답고 정직한 실존의 여정에 교우 여러분을 기쁜 마음으로 초대합니다.
-        </p>
-      </div>
-
-    </article>
+      <ul class="board-list" id="boardList">
+        <li>
+          <a href="#logia-0">
+            <div class="board-item-left">
+              <span class="board-item-badge">주간 말씀 제0호</span>
+              <span class="board-item-title">복음이란 무엇인가: 교리를 넘어 실존적 평화로</span>
+            </div>
+            <span class="board-item-date">FOUNDATIONAL PROLOGUE</span>
+          </a>
+        </li>
+        <li>
+          <a href="#logia-1">
+            <div class="board-item-left">
+              <span class="board-item-badge">제1호 어록 강론</span>
+              <span class="board-item-title">건강한 자와 병든 자: 결핍이 열어젖히는 은혜</span>
+            </div>
+            <span class="board-item-date">2026. 10.</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="sync-status" id="syncStatus">구글 스프레드시트 실시간 연동 대기 중...</div>
 
     <!-- ========================================================
-         [제1호 어록 강론: 마가복음 2:17]
+         [말씀 카드가 렌더링되는 컨테이너]
+         구글 시트 연동 전이나 오프라인 시에도 기본 제0호·제1호가 즉시 표시되며,
+         시트 데이터를 불러오는 즉시 최신 시트 내용으로 자동 업데이트됩니다.
          ======================================================== -->
-    <article class="sermon-card" id="logia-1">
-      <div class="sermon-meta">제1호 어록 강론 | 2026. 10.</div>
-      <h3 class="sermon-title">건강한 자와 병든 자: 결핍이 열어젖히는 은혜</h3>
-      <div class="sermon-scripture">
-        "건강한 자에게는 의사가 필요 없고 병든 자에게라야 필요하다. 나는 의인을 부르러 온 것이 아니라 죄인을 부르러 왔다." (마가복음 2:17)
-      </div>
-      <p style="line-height: 1.85; color: #374151;">
-        스스로 온전하다고 믿으며 에고의 계산기로 삶을 통제하려는 이들에게는 새로운 궤도가 열리지 않습니다. 내 결핍과 아픔, 삶의 막힌 자리를 정직하게 직면하는 자만이 하늘의 의사를 만나 뜻의 병목을 풀고 참된 궤도로 올라탈 수 있습니다.
-      </p>
-    </article>
+    <div id="sermonsContainer">
 
-    <!-- 추후 누적 안내 -->
-    <div style="text-align: center; padding: 26px; background: #fafafa; border-radius: 10px; border: 1px dashed var(--border-color); font-size: 0.95rem; color: var(--text-muted); margin-top: 24px;">
-      매주 일요일 새로운 어록 강론이 이곳에 순차적으로 기록 및 보관됩니다.
+      <!-- [제0호 어록 강론 전문: 프롤로그 선언문] -->
+      <article class="prologue-card" id="logia-0">
+        <span class="prologue-badge">주간 말씀 제0호 | FOUNDATIONAL PROLOGUE</span>
+        <h2 class="prologue-title">복음이란 무엇인가: 교리를 넘어 실존적 평화로</h2>
+        <div class="prologue-subtitle">— 88개 오리지널 어록(Logia) 강론을 시작하며</div>
+
+        <div class="scripture-box">
+          <p><strong>• 마가복음 1:15 :</strong> "때가 찼고 하나님 나라가 가까이 왔으니 회개하고 복음을 믿으라."</p>
+          <p><strong>• 마가복음 5:34 :</strong> "예수께서 이르시되 딸아 네 믿음이 너를 구원하였으니 평안히 가라."</p>
+        </div>
+
+        <div class="prologue-section">
+          <h4>1. 복음의 본질 : 예수께서 직접 선포하신 '말씀의 사건'</h4>
+          <p>우리는 흔히 '복음(福音)'을 '기쁜 소식(Good News)'으로 이해합니다. 잘못된 표현은 아니지만, 한자의 결을 가만히 짚어보면 그것은 '복 복(福)' 자에 '소리 음(音)' 자입니다. 복된 소식을 넘어, 예수께서 인간의 실존을 향해 직접 발하신 '복된 음성'의 뉘앙스를 품고 있습니다.</p>
+          <p>신약성서의 원어인 헬라어 에우앙겔리온(εὐαγγέλιον)의 본뜻은 '복된 소식'입니다. 본래 고대 로마 제국에서 황제의 탄생이나 전쟁의 결정적 승리를 전령이 공포하던 제국의 정치적 용어였습니다. 초대교회는 이 제국의 언어를 과감히 전유했습니다. 로마 황제가 아닌 나사렛 예수가 온 세상의 진정한 승리자이자 해방자임을 선포함으로써, 예수의 십자가와 부활 사건을 제국의 권세를 뛰어넘는 우주적 승리로 격상시킨 것입니다.</p>
+          <p>그러나 역사적 예수 본인의 사역은 황제의 권좌에서 하달된 위압적인 포고문이 아니었습니다. 예수께서는 갈릴리의 가난한 자, 눈먼 자, 율법의 낙인이 찍힌 이들과 눈을 마주치며 인간의 실존을 마주하셨습니다. 그 현장에서 건네신 한마디 한마디는 듣는 이의 굳은 자아를 깨부수고 세계를 다시 보게 만드는 살아 숨 쉬는 <strong>'말씀의 사건(Sprachereignis)'</strong>이었습니다.</p>
+          <p>따라서 복음은 제국의 언어로 격상되어 성경이라는 책 속에 갇힌 도그마로 끝나지 않습니다. 그것은 거대한 포고문을 넘어, 2천 년 전 갈릴리에서 울려 퍼졌던 예수의 원초적 육성이 오늘 나의 상처와 실존에 정면으로 부딪쳐오는 생생한 사건의 현장입니다.</p>
+
+          <h4>2. 해석자 바울의 빛과 그림자: 교리화의 이면과 치열했던 목회적 실존</h4>
+          <p>기독교 역사 속에서 복음은 점차 "예수께서 우리 죄를 대신해 십자가에 죽으시고 부활하심으로 사후 천국을 얻게 되었다"는 교리적 공식으로 환원되었습니다. 이러한 구속론적 체계화를 주도한 인물은 사도 바울이었습니다. 바울은 예수를 생전에 육신으로 직접 만나지 못했던 인물입니다. 그는 다메섹 체험 이후 자신에게 들려온 예수 사건을 헬레니즘적 사유와 묵시문학적 틀로 풀어낸 '탁월한 2차 해석자'였습니다.</p>
+          <p>훗날 4세기 로마 제국이 기독교를 공인하고 신약을 정경화(Canonization)하는 과정에서 바울 서신들이 대거 채택된 데는 분명한 '제국의 통치 논리'가 맞물려 있었습니다. 기득권 체제를 뒤흔들었던 갈릴리 예수의 급진적 삶의 양식보다는, "위에 있는 권세들에게 복종하라"(롬 13:1), "종들아 상전에게 순종하라"(엡 6:5)며 사회 질서를 안정시키고 내면의 죄책감과 사후 구원에 집중하게 만드는 바울의 체계화된 교리가 제국과 교단 권력에게 훨씬 유용했기 때문입니다.</p>
+          <p><strong>그러나 우리는 바울을 결코 일방적으로 매도할 수 없습니다.</strong> 바울의 서신들은 상아탑의 사변이 아니라, 지극히 현실적인 인간 군상의 갈등과 위기 속에서 탄생한 피와 땀의 기록이기 때문입니다. 당시 고린도나 갈라디아 교회는 파당 싸움, 빈부 격차에 따른 차별, 비교와 시기로 날마다 깨어지고 있었습니다. 2000년 전이나 2026년 오늘이나, 인간이 모인 자리는 늘 다툼과 불안으로 요동칩니다. 바울은 바로 그 깨어진 인간 현실 속에서 교회를 화해시키고 성도들을 품어 안기 위해 처절하게 고투했던 위대한 목회자였습니다.</p>
+          <p>그렇기에 그의 편지 속에는 시대를 초월하여 영혼을 울리는 주옥같은 실존적 통찰들이 빛나고 있습니다.</p>
+
+          <div class="quote-box">
+            <p><strong>• 고린도후서 12:9 :</strong> "내 은혜가 네게 족하도다 이는 내 능력이 약한 데서 온전하여짐이라. 내가 약한 그 때에 강함이라." — 결핍과 상처가 오히려 하늘의 은혜가 머무는 통로가 됨을 꿰뚫어 본 고백.</p>
+            <p><strong>• 갈라디아서 3:28 :</strong> "유대인이나 헬라인이나 종이나 자유인이나 남자나 여자나 다 그리스도 예수 안에서 하나이니라." — 당대의 견고한 신분과 성별의 벽을 허물어버린 급진적 평등과 화해의 선언.</p>
+            <p><strong>• 빌립보서 4:6-7 :</strong> "아무것도 염려하지 말고... 모든 지각에 뛰어난 하나님의 평강이 너희 마음과 생각을 지키시리라." — 불안에 떠는 영혼을 향한 평안의 축복.</p>
+          </div>
+
+          <p>바울의 세계관은 갈등 많은 현실을 살아가는 우리에게 여전히 소중한 목회적 지혜를 줍니다. 다만 우리는 바울이 처했던 특정 교회의 '상황적 권면'과, 그 모든 것의 원천이자 샘물이었던 '나사렛 예수 자신의 원초적 육성'을 분별하여, 이제 물줄기의 발원지로 거슬러 올라가고자 하는 것입니다.</p>
+
+          <h4>3. 예수의 육성: 예수 세미나와 5대 복음서</h4>
+          <p>이것이 은혜교회가 현대 신약학의 가장 정직한 결실인 '예수 세미나(Jesus Seminar)'의 오리지널 어록(Logia)에서 출발하는 이유입니다. 1985년 로버트 펑크(Robert Funk)와 존 도미닉 크로산(John Dominic Crossan)을 필두로 모인 200여 명의 세계적 성서학자들은 기독교 역사상 가장 방대한 문헌 비평 작업을 감행했습니다.</p>
+          <p>특히 예수 세미나는 정경 4복음서(마태, 마가, 누가, 요한)에만 갇히지 않고, 1945년 이집트 나그함마디에서 발굴된 '도마복음(Gospel of Thomas)'을 대등한 원천 텍스트로 포함하여 '5대 복음서(The Five Gospels)'를 검토했습니다. 도마복음은 후대 교회의 신학적 각색이나 기적 이야기, 사후 묵시록적 드라마가 전혀 없이, 오직 114개의 예수 말씀만 앙상하게 보존된 가장 원초적인 '어록집(Sayings Gospel)'이었습니다.</p>
+          <p>학자들은 엄격한 역사비평 투표를 통해 후대 교회가 체제 유지를 위해 예수의 입을 빌려 창작해 넣은 수많은 덧칠을 걷어냈습니다. 그리고 5대 복음서 전체에 걸쳐 나사렛 예수께서 실제로 말씀하셨을 확률이 가장 확실한 약 18%의 진정 어록을 확증했습니다.</p>
+
+          <div class="constellation-highlight">
+            저는 5대 복음서에 흩어져 있던 평행본문과 중복 구절들을 하나로 묶어 담담히 정리했습니다. 그렇게 겹치는 구절들을 추려내고 묶었더니 꼭 88개의 어록이 되었습니다.<br><br>
+            개인적으로는 이 숫자가 온 밤하늘을 이루는 공식 88개 별자리(성좌)의 수와 꼭 같다는 사실이 무척 놀라웠고, 제게는 참으로 남다른 경이로움과 깊은 울림으로 다가왔습니다. 하늘의 별자리가 길 잃은 나그네의 밤길을 밝혀주는 길잡이가 되어주듯, 이 88개의 어록은 박제된 교리가 아니라 우리 영혼의 어둠을 걷어내고 참된 평화의 길을 비추어주는 살아 있는 별빛들입니다.
+          </div>
+
+          <p>그 88개의 어록 속 예수는 자신을 제물로 바치라고 요구하지도, 사후 천국을 미끼로 교회를 키우려 하지도 않습니다. 2000년 전이나 오늘이나, 상처와 두려움에 짓눌려 허덕이는 인간의 자아를 깨부수고 자유케 하는 명징한 하나님 나라의 현실을 선포할 뿐입니다.</p>
+
+          <h4>4. "네 믿음이 너를 구원했다": 수동적 피구속에서 주체적 신뢰로</h4>
+          <p>전통 교리는 예수를 영웅적 초월자로 이상화하고, 인간을 무기력하게 피 흘림만 바라보는 수동적 죄인으로 규정했습니다. 그러나 복음서 속 예수는 기적의 시혜(施惠)만을 바라며 몰려든 군중 앞에서 결코 영웅 행세를 하지 않으셨습니다. 그는 구원의 본질을 짚어내며 이렇게 선언하셨습니다.</p>
+          <div class="scripture-box" style="margin-bottom: 14px;">
+            <p>"네 믿음이 너를 구원하였다. 평안히 가라." (마가복음 5:34)</p>
+          </div>
+          <p>구원은 부흥회의 고조된 열기 속에서 손을 번쩍 들고 "확신한다"고 외칠 때 손에 쥐어지는 심리적 면죄부가 아닙니다. 그것은 외부의 누군가가 일방적으로 주입하는 마법적 시혜도 아닙니다. 구원은 예수의 깨어 있는 음성을 마주한 한 인간이, 내면의 두려움과 거짓 자아를 내려놓고 생명의 근원을 온전히 신뢰하기로 돌아설 때 일어나는 <strong>'주체적 믿음의 내적 회복 사건'</strong>입니다.</p>
+          <p>결국 구원의 핵심은 그 선언 끝에 붙은 마지막 말씀처럼, 과연 내가 '평안히 갈 수 있는가'에 달려 있습니다. "평안히 가라"는 예수의 선언 앞에 온 존재로 "예"라고 응답하며 걸어 나아가는 주체는 바로 '나'이기 때문입니다. 그 부름에 스스로 "예"라고 답할 수 있는 주체적 신뢰를 통해, 두려움을 떨치고 자기 삶의 길로 평안히 걸어 나아가는 것, 그것이 곧 구원입니다.</p>
+
+          <h4>5. 삶의 양식(Life-style)의 전환과 궁극적 종착지: '마음의 평화'</h4>
+          <p>따라서 복음과 구원은 분리될 수 없습니다. 복음은 먼 훗날의 약속이 아니라, 지금 발 딛고 선 현실에서 내가 '더 나은 상태, 온전한 존재'로 변화되는 실존적 구원입니다.</p>
+          <p>이를 개인심리학자 알프레드 아들러(Alfred Adler)의 언어로 바꾸어 말하면, 곧 <strong>'삶의 양식(Life-style)의 근본적 전환'</strong>입니다. 당대 사람들은 로마의 정치적 압제와 종교 기득권층이 씌운 율법주의적 낙인 속에서, 조건을 충족해야만 존재 가치를 인정받을 수 있다는 병리적 삶의 양식에 갇혀 극심한 불안과 만성적 죄책감에 시달리고 있었습니다.</p>
+          <p>예수께서는 그 현장에 뛰어들어 당대가 씌운 저주의 낙인을 부수고, 하나님 안에서 우리는 이미 온전히 용납되었으며, 방향의 어긋남(하마르티아, 죄)이 있었을 뿐 결코 버려진 죄인이 아님을 자각시켰습니다. 이것이 예수께서 일으킨 삶의 양식의 혁명입니다.</p>
+          <p>그렇게 변화된 삶의 양식 끝에 피어나는 궁극적 열매는 <strong>자유, 평화, 사랑</strong>입니다. 그러나 내면의 평화가 결여된 사랑은 자칫 "더 사랑해야만 한다"는 가혹한 율법이자 도덕적 억압이 될 뿐입니다. 그렇기에 복음이 도달하는 가장 구체적이고 검증 가능한 실존적 알맹이는 바로 '평화(마음의 평안)'입니다.</p>
+          <div class="scripture-box" style="margin-bottom: 14px;">
+            <p>"평안을 너희에게 끼치노니 곧 나의 평안을 너희에게 주노라. 세상이 주는 것과 같지 아니하니라. 너희는 마음에 근심하지도 말고 두려워하지도 말라." (요한복음 14:27)</p>
+          </div>
+          <p>예수의 평화가 세상이 주는 것과 다른 이유는, 그것이 외부의 조건으로 주어지는 위안이 아니라 내면의 근심과 두려움을 스스로 내려놓을 때 깨어나는 실존의 힘이기 때문입니다. 병든 자의 손을 잡으실 때나 제자들에게 마지막 작별을 건네실 때나, 예수께서 전하고자 하셨던 단 하나의 진심은 <strong>"네 마음속에 진짜 평화가 있기를"</strong> 바라는 것이었습니다. 온갖 세상의 불안과 비교, 통제하려는 에고의 계산기를 내려놓고 내면의 가장 깊은 고요와 평안을 회복하는 것, 이것이 복음의 완성입니다.</p>
+
+          <h4>6. 텍스트를 넘어선 실천: 명상과 '명상 노트'</h4>
+          <p>은혜교회는 말씀을 교리로 암기하거나 머릿속 지식으로만 붙드는 곳이 아닙니다. 예수의 말씀이 오늘 나의 일상과 무의식 깊은 곳에 닿아 실존적 평안을 일으키기 위해, 우리는 '명상'과 '명상 노트'라는 구체적인 훈련을 함께합니다.</p>
+          <p><strong>여기서 우리가 추구하는 명상은 가만히 눈을 감고 앉아 있는 시간에만 머물지 않습니다.</strong> 고요히 호흡을 가라앉힐 때뿐만 아니라, 설거지나 샤워, 운전처럼 몸에 익은 편안한 일상을 이어갈 때도 우리는 명상의 감각을 경험하곤 합니다. 의식이 굳이 애쓰지 않아도 되는 그러한 순간에 일상의 의식은 자연스럽게 옆으로 비켜서고, 그 틈을 타 평소에는 닫혀 있던 무의식의 문이 열리기 때문입니다.</p>
+          <p>의식이 비켜선 그 자리에서는 억압되어 있던 감정이나 잊고 있던 기억, 혹은 전혀 예상치 못한 깊은 통찰들이 수면 위로 떠오릅니다. 다만 무의식이 열렸다고 해서 그 안에서 올라오는 모든 것을 곧장 성령의 음성이나 신성한 계시로 동일시해서는 안 됩니다. 무의식은 깊은 지혜와 생명의 불씨뿐만 아니라, 아직 소화되지 않은 상처와 두려움, 본능적 욕망이 분별되지 않은 채 뒤섞여 있는 날것의 심리적 영토이기 때문입니다.</p>
+          <p>중요한 것은 이 무의식의 영역이 열렸을 때 일어나는 '바른 분별과 조율'입니다. 말씀의 빛 아래 날것의 무의식을 정직하게 마주할 때, 묵혀 있던 감정의 응어리는 안전한 출구를 찾아 해소되고 방어기제 너머에 있던 생명의 생각이 길어 올려집니다. 무의식 그 자체를 맹신하는 것이 아니라, 열린 무의식의 심연을 예수의 말씀에 비추어 치유하고 삶의 궤도를 새롭게 조율해 나가는 이 역동적인 과정—그것이 바로 우리가 고백하는 참된 <strong>'성령의 인도하심'</strong>입니다.</p>
+          <p>그렇기에 우리는 막연한 침묵이나 감상에 머물러 있지 않습니다. 의식이 비켜서며 드러난 날것의 감정과 생각들, 그리고 그것이 말씀과 만나 조율되며 일어나는 내면의 통찰을 즉각적으로 포착하여 <strong>'명상 노트'</strong>에 적어 내려갑니다. 말과 글로 솔직하게 꺼내어 눈으로 확인하고 직면하는 깨어 있는 훈련입니다.</p>
+          <p>목회자인 저 자신 역시 매일 이 명상 노트를 쓰며 내면의 파동을 살피고, 성령의 바른 조명 아래 삶의 궤도를 다듬어가고 있습니다. 은혜교회는 각 사람이 삶의 자리에서 자신의 내면을 투명하게 마주하고, 성령의 인도와 분별을 힘입어 자신만의 명상 노트를 채워가며 영적으로 온전히 자립할 수 있도록 돕는 열린 공동체입니다.</p>
+
+          <h4>맺음말: 은혜교회가 함께 걸어갈 88개의 길</h4>
+          <p>이제 우리는 예수 세미나가 복원해 낸 88개의 오리지널 어록을 매주 하나씩 열어젖힙니다. 2000년 전 갈릴리 사람들의 억압을 부수었던 그 날 선 육성이, 2026년 오늘 불안한 시대를 살아가는 우리 각자의 내면에 어떻게 참된 자유와 평화를 꽃피워내는지, 이 아름답고 정직한 실존의 여정에 교우 여러분을 기쁜 마음으로 초대합니다.</p>
+        </div>
+      </article>
+
+      <!-- [제1호 어록 강론] -->
+      <article class="prologue-card logia-regular" id="logia-1">
+        <span class="prologue-badge">제1호 어록 강론 | 2026. 10.</span>
+        <h2 class="prologue-title">건강한 자와 병든 자: 결핍이 열어젖히는 은혜</h2>
+        <div class="scripture-box">
+          <p>"건강한 자에게는 의사가 필요 없고 병든 자에게라야 필요하다. 나는 의인을 부르러 온 것이 아니라 죄인을 부르러 왔다." (마가복음 2:17)</p>
+        </div>
+        <div class="prologue-section">
+          <p>스스로 온전하다고 믿으며 에고의 계산기로 삶을 통제하려는 이들에게는 새로운 궤도가 열리지 않습니다. 내 결핍과 아픔, 삶의 막힌 자리를 정직하게 직면하는 자만이 하늘의 의사를 만나 뜻의 병목을 풀고 참된 궤도로 올라탈 수 있습니다.</p>
+        </div>
+      </article>
+
     </div>
 
-    <div style="margin-top: 40px; text-align: center;">
-      <a href="index.html" style="display: inline-block; padding: 10px 24px; background: #f0f4f8; border-radius: 6px; font-weight: 600; font-size: 0.95rem;">&larr; 메인 화면으로 돌아가기</a>
+    <div class="back-home-wrap">
+      <a href="index.html" class="back-home-btn">&larr; 은혜교회 홈으로 돌아가기</a>
     </div>
 
   </main>
 
-  <!-- 하단 카피라이트 -->
   <footer>
-    <p>&copy; 2026 은혜교회 (Grace Church). All rights reserved.</p>
-    <p style="margin-top: 4px; font-size: 0.8rem;">한국기독교장로회 | The Presbyterian Church in the Republic of Korea</p>
+    <div class="footer-inner">
+      <div class="footer-brand">한국기독교장로회 은혜교회</div>
+      <div class="footer-info">
+        담임목사 신지호 &bull; 강원특별자치도 원주시 행구로 285<br>
+        이메일: <a href="mailto:lightnlovejh@gmail.com">lightnlovejh@gmail.com</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Grace Church. All rights reserved.</div>
+    </div>
   </footer>
 
-  <!-- 미니 팝업 토글 스크립트 -->
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const menuToggle = document.getElementById("menuToggle");
-      const navMenu = document.getElementById("navMenu");
-      const menuOverlay = document.getElementById("menuOverlay");
+    // 1. 모바일 햄버거 메뉴 스크립트
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const navLinks = document.querySelectorAll('.nav-links a');
 
-      function toggleMenu(e) {
-        e.stopPropagation();
-        const isOpen = navMenu.classList.contains("open");
-        if (isOpen) {
-          navMenu.classList.remove("open");
-          menuOverlay.classList.remove("active");
-        } else {
-          navMenu.classList.add("open");
-          menuOverlay.classList.add("active");
+    function toggleMenu() {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      menuOverlay.classList.toggle('active');
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+    menuOverlay.addEventListener('click', toggleMenu);
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (navMenu.classList.contains('active')) toggleMenu();
+      });
+    });
+
+    // 2. 구글 스프레드시트 실시간 연동 및 매거진 디자인 자동 변환 엔진
+    const SHEET_ID = '1qQCoqkV4ypq7KyoJhLl1HiYgRjYdZksXxXEA_MGAwbw';
+    const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+
+    // HTML 특수문자 보호 및 **굵은글씨**, '작은따옴표 강조' 변환 함수
+    function formatInlineText(str) {
+      if (!str) return '';
+      let escaped = str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+      // **텍스트** -> <strong>텍스트</strong> 변환
+      escaped = escaped.replace(/\*\*(.+?)\*\*/g, '<strong>\$1</strong>');
+      // • 항목 콜론 강조 (예: • 마가복음 1:15 :)
+      escaped = escaped.replace(/^(•\s*[^:]+:)/, '<strong>\$1</strong>');
+      return escaped;
+    }
+
+    // 성경본문(E열)을 연보라/하늘색 성구 박스로 변환
+    function buildScriptureBox(text) {
+      if (!text || !text.trim()) return '';
+      const lines = text.split(/\r?\n/).filter(l => l.trim() !== '');
+      const pTags = lines.map(l => `<p>${formatInlineText(l.trim())}</p>`).join('');
+      return `<div class="scripture-box">${pTags}</div>`;
+    }
+
+    // 본문원고(F열)의 기호(#, >, ★, @)를 분석해 은혜교회 매거진 디자인으로 변환
+    function parseSermonBody(rawBody) {
+      if (!rawBody || !rawBody.trim()) return '';
+      const lines = rawBody.split(/\r?\n/);
+      let html = '<div class="prologue-section">';
+      let quoteBuffer = [];
+      let highlightBuffer = [];
+
+      function flushBuffers() {
+        if (quoteBuffer.length > 0) {
+          html += `<div class="quote-box">${quoteBuffer.map(q => `<p>\${formatInlineText(q)}</p>`).join('')}</div>`;
+          quoteBuffer = [];
+        }
+        if (highlightBuffer.length > 0) {
+          html += `<div class="constellation-highlight">${highlightBuffer.map(h => formatInlineText(h)).join('<br><br>')}</div>`;
+          highlightBuffer = [];
         }
       }
 
-      function closeMenu() {
-        navMenu.classList.remove("open");
-        menuOverlay.classList.remove("active");
+      for (let rawLine of lines) {
+        const line = rawLine.trim();
+        if (!line) continue;
+
+        if (line.startsWith('#')) {
+          flushBuffers();
+          const headingText = line.replace(/^#+\s*/, '');
+          html += `<h4>${formatInlineText(headingText)}</h4>`;
+        } else if (line.startsWith('>')) {
+          if (highlightBuffer.length > 0) flushBuffers();
+          const quoteText = line.replace(/^>\s*/, '');
+          quoteBuffer.push(quoteText);
+        } else if (line.startsWith('★') || (line.startsWith('*') && !line.startsWith('**'))) {
+          if (quoteBuffer.length > 0) flushBuffers();
+          const hlText = line.replace(/^[★\*]\s*/, '');
+          highlightBuffer.push(hlText);
+        } else if (line.startsWith('@')) {
+          flushBuffers();
+          const scText = line.replace(/^@\s*/, '');
+          html += `<div class="scripture-box" style="margin-bottom: 14px;"><p>${formatInlineText(scText)}</p></div>`;
+        } else {
+          // 만약 바로 앞 줄이 > 인용구였고 현재 줄이 • 로 시작하면 같은 인용구 박스로 묶음
+          if (quoteBuffer.length > 0 && line.startsWith('•')) {
+            quoteBuffer.push(line);
+          } else {
+            flushBuffers();
+            html += `<p>${formatInlineText(line)}</p>`;
+          }
+        }
       }
+      flushBuffers();
+      html += '</div>';
+      return html;
+    }
 
-      if (menuToggle) menuToggle.addEventListener("click", toggleMenu);
-      if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
+    async function loadSermonsFromSheet() {
+      const statusEl = document.getElementById('syncStatus');
+      try {
+        const response = await fetch(SHEET_URL);
+        const text = await response.text();
+        const jsonString = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
+        const data = JSON.parse(jsonString);
+        const rows = data.table.rows;
 
-      document.querySelectorAll(".nav-links a").forEach((link) => {
-        link.addEventListener("click", closeMenu);
-      });
-    });
+        if (!rows || rows.length === 0) return;
+
+        const sermons = [];
+        rows.forEach((r, idx) => {
+          const cells = r.c;
+          if (!cells) return;
+          const issue = cells[0] && cells[0].v ? String(cells[0].v).trim() : '';
+          const date = cells[1] && cells[1].v ? String(cells[1].v).trim() : '';
+          const title = cells[2] && cells[2].v ? String(cells[2].v).trim() : '';
+          const subtitle = cells[3] && cells[3].v ? String(cells[3].v).trim() : '';
+          const scripture = cells[4] && cells[4].v ? String(cells[4].v).trim() : '';
+          const body = cells[5] && cells[5].v ? String(cells[5].v).trim() : '';
+
+          // 안내 줄이나 제목 줄('호수')은 자동으로 건너뜀
+          if (!issue || !title || issue === '호수' || issue.includes('작성 기호')) return;
+
+          sermons.push({ issue, date, title, subtitle, scripture, body, id: `logia-${sermons.length}` });
+        });
+
+        if (sermons.length === 0) return;
+
+        // 1) 상단 게시판 목차 업데이트
+        const boardListEl = document.getElementById('boardList');
+        const postCountEl = document.getElementById('postCount');
+        postCountEl.textContent = `수록 말씀 ${sermons.length}편`;
+
+        boardListEl.innerHTML = sermons.map((s) => `
+          <li>
+            <a href="#${s.id}">
+              <div class="board-item-left">
+                <span class="board-item-badge">${formatInlineText(s.issue)}</span>
+                <span class="board-item-title">${formatInlineText(s.title)}</span>
+              </div>
+              <span class="board-item-date">${formatInlineText(s.date)}</span>
+            </a>
+          </li>
+        `).join('');
+
+        // 2) 말씀 본문 카드 렌더링 (제0호는 보라색 포인트, 제1호 이상은 블루 포인트)
+        const containerEl = document.getElementById('sermonsContainer');
+        containerEl.innerHTML = sermons.map((s, idx) => {
+          const isPrologue = idx === 0 || s.issue.includes('제0호');
+          const cardClass = isPrologue ? 'prologue-card' : 'prologue-card logia-regular';
+          const badgeText = s.date ? `${formatInlineText(s.issue)} | ${formatInlineText(s.date)}` : formatInlineText(s.issue);
+          const subtitleHtml = s.subtitle ? `<div class="prologue-subtitle">${formatInlineText(s.subtitle)}</div>` : '';
+          const scriptureHtml = buildScriptureBox(s.scripture);
+          const bodyHtml = parseSermonBody(s.body);
+
+          return `
+            <article class="${cardClass}" id="${s.id}">
+              <span class="prologue-badge">${badgeText}</span>
+              <h2 class="prologue-title">${formatInlineText(s.title)}</h2>
+              ${subtitleHtml}
+              ${scriptureHtml}
+              ${bodyHtml}
+            </article>
+          `;
+        }).join('');
+
+        statusEl.textContent = '✓ 구글 스프레드시트 최신 말씀 연동 완료';
+      } catch (err) {
+        // 시트가 아직 비공개 상태이거나 네트워크 오류 시 기본 내장된 말씀 유지
+        statusEl.textContent = '기본 아카이브 표시 중 (구글 시트 공유 권한 설정 시 자동 연동됩니다)';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadSermonsFromSheet);
   </script>
 </body>
 </html>
