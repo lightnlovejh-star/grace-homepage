@@ -1,6 +1,7 @@
 ﻿/* ========================================================
    [은혜교회 통합 공통 스타일시트 - style.css]
-   2x2 허브 그리드 / 6개 메뉴 모바일 팝업 / 상담 페이지 및 타이포그래피 정렬 통합본
+   PC 우측 상단 인라인 메뉴 / 모바일 다크 글래스 미니 팝업 /
+   2x2 허브 그리드 / 슬림 캘린더 배너 통합 완결본
    ======================================================== */
 :root {
   --primary-blue: #009ee2;
@@ -42,7 +43,7 @@ a {
 }
 
 /* ========================================================
-   [상단 고정 헤더]
+   [상단 고정 헤더: PC & 모바일 공통 틀]
    ======================================================== */
 .site-header {
   position: sticky;
@@ -89,6 +90,7 @@ a {
   line-height: 1;
 }
 
+/* PC 우측 상단 가로 메뉴 */
 .nav-menu {
   display: flex;
   align-items: center;
@@ -107,11 +109,13 @@ a {
   transition: color 0.2s ease;
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--primary-blue);
   font-weight: 700;
 }
 
+/* 햄버거 버튼: PC에서는 숨김 */
 .menu-toggle {
   display: none;
   background: transparent;
@@ -448,7 +452,6 @@ section {
   font-weight: 700;
 }
 
-/* 본문 일반 단락 (줄글) */
 .article-block > p,
 .article-block p {
   font-size: 0.98rem;
@@ -661,7 +664,8 @@ details[open] summary .accordion-icon {
   font-size: 1.1rem;
 }
 
-.location-item p, .location-item ul {
+.location-item p,
+.location-item ul {
   font-size: 0.94rem;
   color: #444;
   margin-left: 12px;
@@ -870,7 +874,6 @@ details[open] summary .accordion-icon {
   text-align: left;
 }
 
-/* 1줄/2줄 상관없이 높이를 맞춰 구분선 위치를 수평 일치 */
 .program-meta {
   font-size: 0.86rem;
   font-weight: 600;
@@ -886,7 +889,6 @@ details[open] summary .accordion-icon {
   word-break: keep-all;
 }
 
-/* 프로그램 카드 본문: 양쪽 정렬 해제 및 좌측 정렬 */
 .program-card .program-desc,
 .program-desc {
   font-size: 0.91rem;
@@ -1048,7 +1050,6 @@ details[open] summary .accordion-icon {
   text-align: center;
 }
 
-/* 프로세스 카드 본문: 중앙 정렬 및 자간 조율 */
 .process-card p {
   font-size: 0.82rem;
   color: #64748b;
@@ -1116,32 +1117,38 @@ details[open] summary .accordion-icon {
   box-shadow: 0 6px 18px rgba(0, 158, 226, 0.35);
 }
 
-/* 모바일 (768px 이하) 반응형 대응 */
+/* ========================================================
+   [모바일 전용 최적화: 768px 이하]
+   ======================================================== */
 @media (max-width: 768px) {
-  .calendar-container {
-    padding: 20px 18px;
+  .site-header {
+    height: var(--header-height-m);
   }
 
-  .calendar-card-inner {
-    flex-direction: column;
-    text-align: center;
-    gap: 16px;
+  .nav-container {
+    padding: 0 18px;
   }
 
-  .calendar-info h4 {
-    text-align: center;
+  .brand-logo {
+    width: 26px;
+    height: 26px;
   }
 
-  .calendar-info p {
-    text-align: center !important;
+  .brand-title {
+    font-size: 18px;
+    font-weight: 700;
   }
 
-  .calendar-btn-direct {
-    width: 100%;
+  /* 모바일 햄버거 버튼 활성화 */
+  .menu-toggle {
+    display: flex;
   }
-}
 
-  /* 154px 다크 글래스 미니 팝업 (6개 메뉴) */
+  .subpage-hero {
+    padding: 36px 18px 24px;
+  }
+
+  /* 모바일 154px 다크 글래스 미니 플로팅 팝업 메뉴 */
   .nav-menu {
     display: none;
     position: absolute;
@@ -1187,7 +1194,8 @@ details[open] summary .accordion-icon {
     white-space: nowrap;
   }
 
-  .nav-links a:hover, .nav-links a.active {
+  .nav-links a:hover,
+  .nav-links a.active {
     background-color: rgba(56, 189, 248, 0.18);
     color: var(--accent-glow);
     font-weight: 600;
@@ -1301,7 +1309,25 @@ details[open] summary .accordion-icon {
   }
 
   .calendar-container {
-    padding: 20px 16px;
+    padding: 20px 18px;
+  }
+
+  .calendar-card-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .calendar-info h4 {
+    text-align: center;
+  }
+
+  .calendar-info p {
+    text-align: center !important;
+  }
+
+  .calendar-btn-direct {
+    width: 100%;
   }
 }
 
