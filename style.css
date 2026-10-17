@@ -1059,91 +1059,87 @@ details[open] summary .accordion-icon {
   word-break: keep-all;
 }
 
-/* 4. 캘린더 인터페이스 */
+/* 4. 캘린더 슬림 배너 카드 */
 .calendar-container {
   background: #ffffff;
   border: 1px solid var(--border-color);
   border-radius: 14px;
-  padding: 28px 24px;
+  padding: 24px 28px;
   margin: 28px 0;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
 }
 
-.calendar-notice {
-  background: #f0fdf4;
-  border-left: 4px solid #16a34a;
-  padding: 14px 18px;
-  border-radius: 6px;
-  margin-bottom: 22px;
-  font-size: 0.92rem;
-  color: #166534;
-  line-height: 1.7;
-}
-
-.calendar-frame-wrap {
-  width: 100%;
-  min-height: 520px;
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  overflow: hidden;
-  background: #fbfbfd;
+.calendar-card-inner {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
-.calendar-placeholder {
-  text-align: center;
-  padding: 40px 20px;
+.calendar-info h4 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 4px;
+  letter-spacing: -0.4px;
+  text-align: left;
+}
+
+.calendar-info p {
+  font-size: 0.92rem;
   color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+  text-align: left !important;
 }
 
 .calendar-btn-direct {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 12px 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
   background: var(--primary-blue);
   color: #ffffff;
   border-radius: 30px;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.94rem;
   text-decoration: none;
-  transition: background 0.2s ease;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 158, 226, 0.25);
+  flex-shrink: 0;
 }
 
 .calendar-btn-direct:hover {
   background: #0284c7;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 158, 226, 0.35);
 }
 
-/* ========================================================
-   [모바일 전용 최적화: 768px 이하]
-   ======================================================== */
+/* 모바일 (768px 이하) 반응형 대응 */
 @media (max-width: 768px) {
-  .site-header {
-    height: var(--header-height-m);
+  .calendar-container {
+    padding: 20px 18px;
   }
 
-  .nav-container {
-    padding: 0 18px;
+  .calendar-card-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
   }
 
-  .brand-logo {
-    width: 26px;
-    height: 26px;
+  .calendar-info h4 {
+    text-align: center;
   }
 
-  .brand-title {
-    font-size: 18px;
-    font-weight: 700;
+  .calendar-info p {
+    text-align: center !important;
   }
 
-  .menu-toggle {
-    display: flex;
+  .calendar-btn-direct {
+    width: 100%;
   }
-
-  .subpage-hero {
-    padding: 36px 18px 24px;
-  }
+}
 
   /* 154px 다크 글래스 미니 팝업 (6개 메뉴) */
   .nav-menu {
