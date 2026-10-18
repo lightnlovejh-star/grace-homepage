@@ -456,8 +456,8 @@
     });
 
     // 2. 구글 스프레드시트 실시간 연동 및 매거진 디자인 자동 변환 엔진
-    const SHEET_ID = '1qQCoqkV4ypq7KyoJhL11HiYgRjYdZksXxXEA_MGAwbw';
-    const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+    const SHEET_ID = '1qQCoqkV4ypq7KyoJhLl1HiYgRjYdZksXxXEA_MGAwbw';
+    const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&t=` + new Date().getTime();
 
     // HTML 특수문자 보호 및 **굵은글씨**, '작은따옴표 강조' 변환 함수
     function formatInlineText(str) {
