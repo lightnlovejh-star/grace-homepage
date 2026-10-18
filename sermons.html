@@ -521,13 +521,14 @@
           const scText = line.replace(/^@\s*/, '');
           html += `<div class="scripture-box" style="margin-bottom: 14px;"><p>${formatInlineText(scText)}</p></div>`;
         } else {
-          // 만약 바로 앞 줄이 > 인용구였고 현재 줄이 • 로 시작하면 같은 인용구 박스로 묶음
-          if (quoteBuffer.length > 0 && (line.startsWith('•') || line.startsWith('—') || line.startsWith('-'))) {
-            quoteBuffer.push(line);
-          } else {
-            flushBuffers();
-            html += `<p>${formatInlineText(line)}</p>`;
-          }
+        // 세상의 모든 종류의 짝대기(하이픈, 엔대시, 엠대시 등)가 오더라도 튕겨내지 않고 박스 안에 묶음
+        if (quoteBuffer.length > 0 && /^[•\-—–―－]/.test(line)) {
+          quoteBuffer.push(line);
+        } else {
+          flushBuffers();
+          html += `<p>${formatInlineText(line)}</p>`;
+        }
+      }
         }
       }
       flushBuffers();
