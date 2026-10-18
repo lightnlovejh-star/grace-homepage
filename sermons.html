@@ -521,9 +521,14 @@
           const scText = line.replace(/^@\s*/, '');
           html += `<div class="scripture-box" style="margin-bottom: 14px;"><p>${formatInlineText(scText)}</p></div>`;
         } else {
-        // 세상의 모든 종류의 짝대기(하이픈, 엔대시, 엠대시 등)가 오더라도 튕겨내지 않고 박스 안에 묶음
         if (quoteBuffer.length > 0 && /^[•\-—–―－]/.test(line)) {
-          quoteBuffer.push(line);
+          if (/^[\-—–―－]/.test(line)) {
+            // 짝대기(—)로 시작하는 설명은 새 문단이 아니라 이전 성구 바로 밑에 줄바꿈(<br>)으로 딱 붙임
+            quoteBuffer[quoteBuffer.length - 1] += '<br>' + line;
+          } else {
+            // • 기호로 시작하는 새로운 성구는 새로운 문단으로 분리
+            quoteBuffer.push(line);
+          }
         } else {
           flushBuffers();
           html += `<p>${formatInlineText(line)}</p>`;
