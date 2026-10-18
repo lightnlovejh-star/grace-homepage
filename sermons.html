@@ -522,7 +522,7 @@
           html += `<div class="scripture-box" style="margin-bottom: 14px;"><p>${formatInlineText(scText)}</p></div>`;
         } else {
           // 만약 바로 앞 줄이 > 인용구였고 현재 줄이 • 로 시작하면 같은 인용구 박스로 묶음
-          if (quoteBuffer.length > 0 && line.startsWith('•')) {
+          if (quoteBuffer.length > 0 && (line.startsWith('•') || line.startsWith('—') || line.startsWith('-'))) {
             quoteBuffer.push(line);
           } else {
             flushBuffers();
