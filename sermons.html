@@ -435,30 +435,23 @@
   </footer>
 
   <script>
-    // 1. 헤더 모바일 메뉴 스크립트
-    document.addEventListener("DOMContentLoaded", function () {
-      const menuToggle = document.getElementById("menuToggle");
-      const navMenu = document.getElementById("navMenu");
-      const menuOverlay = document.getElementById("menuOverlay");
+    // 1. 모바일 햄버거 메뉴 스크립트
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const navLinks = document.querySelectorAll('.nav-links a');
 
-      function toggleMenu(e) {
-        e.stopPropagation();
-        if (navMenu.classList.contains("open")) {
-          navMenu.classList.remove("open");
-          menuOverlay.classList.remove("active");
-        } else {
-          navMenu.classList.add("open");
-          menuOverlay.classList.add("active");
-        }
-      }
-      function closeMenu() {
-        navMenu.classList.remove("open");
-        menuOverlay.classList.remove("active");
-      }
-      if (menuToggle) menuToggle.addEventListener("click", toggleMenu);
-      if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
-      document.querySelectorAll(".nav-links a").forEach((link) => {
-        link.addEventListener("click", closeMenu);
+    function toggleMenu() {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      menuOverlay.classList.toggle('active');
+    }
+
+    if (menuToggle) menuToggle.addEventListener('click', toggleMenu);
+    if (menuOverlay) menuOverlay.addEventListener('click', toggleMenu);
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (navMenu.classList.contains('active')) toggleMenu();
       });
     });
 
@@ -466,7 +459,7 @@
     const SHEET_ID = '1qQCoqkV4ypq7KyoJhL11HiYgRjYdZksXxXEA_MGAwbw';
     const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-    // HTML 특수문자 보호 및 **굵은글씨**, 장절 강조 변환 함수
+    // HTML 특수문자 보호 및 **굵은글씨**, '작은따옴표 강조' 변환 함수
     function formatInlineText(str) {
       if (!str) return '';
       let escaped = str
@@ -474,15 +467,23 @@
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
       
-      // 구글 시트에서 ** 로 감싼 부분 무조건 굵게 처리
+      // **텍스트** -> <strong>텍스트</strong> 변환
       escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>\$1</strong>');
-      // • 로 시작해서 첫 번째 큰따옴표(")가 나오기 전까지의 성구 이름 무조건 통째로 굵게 처리
+      // • 항목 콜론 강조 (장/절, 특수기호 상관없이 큰따옴표가 나오기 전까지 통째로 굵게)
       escaped = escaped.replace(/^(•\s*[^"]+?)(?=\s*")/g, '<strong>\$1</strong>');
       
       return escaped;
     }
 
-    // 본문원고(F열)의 기호를 분석해 은혜교회 매거진 디자인으로 변환
+    // 성경본문(E열)을 연보라/하늘색 성구 박스로 변환
+    function buildScriptureBox(text) {
+      if (!text || !text.trim()) return '';
+      const lines = text.split(/\r?\n/).filter(l => l.trim() !== '');
+      const pTags = lines.map(l => `<p>${formatInlineText(l.trim())}</p>`).join('');
+      return `<div class="scripture-box">${pTags}</div>`;
+    }
+
+    // 본문원고(F열)의 기호(#, >, ★, @)를 분석해 은혜교회 매거진 디자인으로 변환
     function parseSermonBody(rawBody) {
       if (!rawBody || !rawBody.trim()) return '';
       const lines = rawBody.split(/\r?\n/);
@@ -522,13 +523,12 @@
           const scText = line.replace(/^@\s*/, '');
           html += `<div class="scripture-box" style="margin-bottom: 14px;"><p>${formatInlineText(scText)}</p></div>`;
         } else {
-          // 세상의 모든 종류의 짝대기(-, —, –, ㅡ)와 • 기호를 유연하게 하나로 묶어내는 핵심 규칙
+          // 어떤 길이의 짝대기 기호라도 떨어져 나가지 않게 품는 완벽한 조건
           if (quoteBuffer.length > 0 && /^[•\-\—\–\―\－]/.test(line)) {
             if (/^[\-\—\–\―\－]/.test(line)) {
-              // 짝대기로 시작하면 새로운 문단으로 벌리지 않고, 이전 성구 밑에 좁은 줄바꿈(<br>)으로 착 붙임
-              quoteBuffer[quoteBuffer.length - 1] += '<br>' + formatInlineText(line);
+              // 짝대기(—)로 시작하는 설명은 새 문단이 아니라 이전 줄 바로 밑에 좁은 줄바꿈(<br>)으로 딱 붙임
+              quoteBuffer[quoteBuffer.length - 1] += '<br>' + line;
             } else {
-              // • 로 시작하는 새로운 성구는 새로운 문단으로 처리
               quoteBuffer.push(line);
             }
           } else {
@@ -542,46 +542,86 @@
       return html;
     }
 
-    // 구글 시트 데이터 로드 및 렌더링
     async function loadSermonsFromSheet() {
+      const statusEl = document.getElementById('syncStatus');
       try {
         const response = await fetch(SHEET_URL);
         const text = await response.text();
-        const json = JSON.parse(text.substring(47, text.length - 2));
-        const rows = json.table.rows;
+        const jsonString = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
+        const data = JSON.parse(jsonString);
+        const rows = data.table.rows;
 
-        const mainContainer = document.getElementById('sermons-container');
-        if (!mainContainer) return;
-        mainContainer.innerHTML = '';
+        if (!rows || rows.length === 0) return;
 
-        rows.forEach((row, index) => {
-          const type = row.c[0] ? row.c[0].v : '';
-          const no = row.c[1] ? row.c[1].v : '';
-          const title = row.c[2] ? row.c[2].v : '';
-          const scripture = row.c[3] ? row.c[3].v : '';
-          const bodyText = row.c[5] ? row.c[5].v : '';
+        const sermons = [];
+        rows.forEach((r, idx) => {
+          const cells = r.c;
+          if (!cells) return;
+          const issue = cells[0] && cells[0].v ? String(cells[0].v).trim() : '';
+          const date = cells[1] && cells[1].v ? String(cells[1].v).trim() : '';
+          const title = cells[2] && cells[2].v ? String(cells[2].v).trim() : '';
+          const subtitle = cells[3] && cells[3].v ? String(cells[3].v).trim() : '';
+          const scripture = cells[4] && cells[4].v ? String(cells[4].v).trim() : '';
+          const body = cells[5] && cells[5].v ? String(cells[5].v).trim() : '';
 
-          if (type === '여는 글') {
-            const article = document.createElement('article');
-            article.className = 'sermon-card prologue';
-            article.id = 'prologue';
-            
-            let html = `<div class="sermon-meta">제${no}호 여는 글</div>`;
-            html += `<h2 class="sermon-title">${formatInlineText(title)}</h2>`;
-            if (scripture) {
-              html += `<div class="sermon-scripture">${formatInlineText(scripture)}</div>`;
-            }
-            html += parseSermonBody(bodyText);
-            article.innerHTML = html;
-            mainContainer.appendChild(article);
-          }
+          // 안내 줄이나 제목 줄('호수')은 자동으로 건너뜀 (A열이 비어있으면 여기서 스킵됨)
+          if (!issue || !title || issue === '호수' || issue.includes('작성 기호')) return;
+
+          sermons.push({ issue, date, title, subtitle, scripture, body, id: `logia-${sermons.length}` });
         });
-      } catch (error) {
-        console.error('구글 시트 데이터를 불러오는데 실패했습니다:', error);
+
+        if (sermons.length === 0) return;
+
+        // 1) 상단 게시판 목차 업데이트 (기존 지호님 코드 완전 복구)
+        const boardListEl = document.getElementById('boardList');
+        const postCountEl = document.getElementById('postCount');
+        if (postCountEl) postCountEl.textContent = `수록 말씀 ${sermons.length}편`;
+
+        if (boardListEl) {
+          boardListEl.innerHTML = sermons.map((s) => `
+            <li>
+              <a href="#${s.id}">
+                <div class="board-item-left">
+                  <span class="board-item-badge">${formatInlineText(s.issue)}</span>
+                  <span class="board-item-title">${formatInlineText(s.title)}</span>
+                </div>
+                <span class="board-item-date">${formatInlineText(s.date)}</span>
+              </a>
+            </li>
+          `).join('');
+        }
+
+        // 2) 말씀 본문 카드 렌더링 (제0호 뿐만 아니라 제1호, 제2호 밑으로 계속 추가됨)
+        const containerEl = document.getElementById('sermonsContainer');
+        if (containerEl) {
+          containerEl.innerHTML = sermons.map((s, idx) => {
+            const isPrologue = idx === 0 || s.issue.includes('제0호');
+            const cardClass = isPrologue ? 'prologue-card' : 'prologue-card logia-regular';
+            const badgeText = s.date ? `${formatInlineText(s.issue)} | ${formatInlineText(s.date)}` : formatInlineText(s.issue);
+            const subtitleHtml = s.subtitle ? `<div class="prologue-subtitle">${formatInlineText(s.subtitle)}</div>` : '';
+            const scriptureHtml = buildScriptureBox(s.scripture);
+            const bodyHtml = parseSermonBody(s.body);
+
+            return `
+              <article class="${cardClass}" id="${s.id}">
+                <span class="prologue-badge">${badgeText}</span>
+                <h2 class="prologue-title">${formatInlineText(s.title)}</h2>
+                ${subtitleHtml}
+                ${scriptureHtml}
+                ${bodyHtml}
+              </article>
+            `;
+          }).join('');
+        }
+
+        if (statusEl) statusEl.textContent = '✓ 구글 스프레드시트 최신 말씀 연동 완료';
+      } catch (err) {
+        if (statusEl) statusEl.textContent = '기본 아카이브 표시 중 (구글 시트 공유 권한 설정 시 자동 연동됩니다)';
+        console.error(err);
       }
     }
 
-    loadSermonsFromSheet();
+    document.addEventListener('DOMContentLoaded', loadSermonsFromSheet);
   </script>
 </body>
 </html>
