@@ -469,7 +469,7 @@
       // **텍스트** -> <strong>텍스트</strong> 변환
       escaped = escaped.replace(/\*\*(.+?)\*\*/g, '<strong>\$1</strong>');
       // • 항목 콜론 강조 (예: • 마가복음 1:15 :)
-      escaped = escaped.replace(/^(•\s*[^:]+:)/, '<strong>\$1</strong>');
+      escaped = escaped.replace(/^(\•\s*.*?\s*:)/, '<strong>\$1</strong>');
       return escaped;
     }
 
