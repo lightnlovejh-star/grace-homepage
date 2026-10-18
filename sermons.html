@@ -491,7 +491,7 @@
 
       function flushBuffers() {
         if (quoteBuffer.length > 0) {
-          html += `<div class="quote-box">${quoteBuffer.map(q => `<p>\${formatInlineText(q)}</p>`).join('')}</div>`;
+          html += `<div class="quote-box">${quoteBuffer.map(q => `<p>${formatInlineText(q)}</p>`).join('')}</div>`;
           quoteBuffer = [];
         }
         if (highlightBuffer.length > 0) {
