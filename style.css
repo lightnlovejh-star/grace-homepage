@@ -1,4 +1,4 @@
-﻿/* ========================================================
+/* ========================================================
    [은혜교회 통합 공통 스타일시트 - style.css]
    PC 우측 상단 인라인 메뉴 / 모바일 다크 글래스 미니 팝업 /
    2x2 허브 그리드 / 슬림 캘린더 배너 통합 완결본
@@ -72,15 +72,15 @@ a {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
-  align-items: stretch; /* 자식 너비를 가장 넓은 brand-top에 꽉 채움 */
-  gap: 4px; /* 상하 여백 */
+  align-items: stretch;
+  gap: 4px;
   text-decoration: none;
 }
 
 .brand-top {
   display: flex;
   align-items: center;
-  gap: 8px; /* 로고와 교회명 사이 여백 */
+  gap: 8px;
 }
 
 .brand-logo {
@@ -98,7 +98,6 @@ a {
   line-height: 1;
 }
 
-/* 8글자가 로고 좌측부터 교회명 우측까지 완벽히 균등 배치됨 */
 .brand-denomination {
   display: flex;
   justify-content: space-between; 
@@ -1148,19 +1147,14 @@ details[open] summary .accordion-icon {
     padding: 0 18px;
   }
 
-  .brand-link {
-    gap: 3px;
-  }
   .brand-logo {
     width: 26px;
     height: 26px;
   }
+
   .brand-title {
     font-size: 18px;
     font-weight: 700;
-  }
-  .brand-denomination {
-    font-size: 9px;
   }
 
   /* 모바일 햄버거 버튼 활성화 */

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -11,33 +11,36 @@
   <!-- 상단 고정 헤더 -->
   <header class="site-header">
     <div class="nav-container">
-      <div class="brand">
-        <!-- 1행: 로고와 은혜교회 -->
-        <a href="index.html" class="brand-top">
-          <img src="logo.png" alt="은혜교회 로고" onerror="this.style.display='none'">
-          <span class="church-name">은혜교회</span>
-        </a>
-        <!-- 구분선 -->
-        <div class="brand-divider"></div>
-        <!-- 2행: 한글 교단명 -->
-        <div class="denomination-ko">
+      <a href="index.html" class="brand-link">
+        <div class="brand-top">
+          <img src="logo.png" alt="은혜교회 로고" class="brand-logo" onerror="this.style.display='none'">
+          <span class="brand-title">은혜교회</span>
+        </div>
+        <div class="brand-denomination">
           <span>한</span><span>국</span><span>기</span><span>독</span><span>교</span><span>장</span><span>로</span><span>회</span>
         </div>
-        <!-- 3행: 영문 교단명 -->
-        <div class="denomination-en">
-          The Presbyterian Church in the Republic of Korea
-        </div>
-      </div>
-      <!-- 우측 상단 내비게이션 (목회자 소개 2번째 배치) -->
-      <nav>
-        <ul>
+      </a>
+      <!-- 모바일 햄버거 버튼 -->
+      <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- 아담한 플로팅 팝업 메뉴 -->
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-links">
           <li><a href="confession.html">고백과 여정</a></li>
           <li><a href="index.html#pastor">목회자 소개</a></li>
           <li><a href="sermons.html">주간 말씀</a></li>
-          <li><a href="https://www.youtube.com/channel/UC9nGAkJKbWEKLsc8grpdjNg" target="_blank" rel="noopener noreferrer">명상과 밥상</a></li>
+          <li><a href="counseling.html">뜻과 치유</a></li>
+          <li><a href="https://www.youtube.com/channel/UC9nGAkJKbWEKLsc8grpdjNg" target="_blank" rel="noopener noreferrer" class="yt-link">명상과 밥상 ↗</a></li>
           <li><a href="index.html#contact">오시는 길</a></li>
         </ul>
       </nav>
+
+      <!-- 바깥 영역 터치 시 닫기 레이어 -->
+      <div class="menu-overlay" id="menuOverlay"></div>
     </div>
   </header>
 
@@ -84,6 +87,33 @@
   <!-- 스크롤 페이드인 인터랙션 스크립트 -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      const menuToggle = document.getElementById("menuToggle");
+      const navMenu = document.getElementById("navMenu");
+      const menuOverlay = document.getElementById("menuOverlay");
+
+      function toggleMenu(e) {
+        if(e) e.stopPropagation();
+        const isOpen = navMenu.classList.contains("open");
+        if (isOpen) {
+          navMenu.classList.remove("open");
+          menuOverlay.classList.remove("active");
+        } else {
+          navMenu.classList.add("open");
+          menuOverlay.classList.add("active");
+        }
+      }
+
+      function closeMenu() {
+        navMenu.classList.remove("open");
+        menuOverlay.classList.remove("active");
+      }
+
+      if (menuToggle) menuToggle.addEventListener("click", toggleMenu);
+      if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
+
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+      });
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
