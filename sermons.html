@@ -514,18 +514,27 @@
     const menuOverlay = document.getElementById('menuOverlay');
     const navLinks = document.querySelectorAll('.nav-links a');
 
-    function toggleMenu() {
-      menuToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
-      menuOverlay.classList.toggle('active');
+    function toggleMenu(e) {
+      if(e) e.stopPropagation();
+      const isOpen = navMenu.classList.contains('open');
+      if (isOpen) {
+        navMenu.classList.remove('open');
+        menuOverlay.classList.remove('active');
+      } else {
+        navMenu.classList.add('open');
+        menuOverlay.classList.add('active');
+      }
     }
 
-    menuToggle.addEventListener('click', toggleMenu);
-    menuOverlay.addEventListener('click', toggleMenu);
+    function closeMenu() {
+      navMenu.classList.remove('open');
+      menuOverlay.classList.remove('active');
+    }
+
+    if (menuToggle) menuToggle.addEventListener('click', toggleMenu);
+    if (menuOverlay) menuOverlay.addEventListener('click', closeMenu);
     navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        if (navMenu.classList.contains('active')) toggleMenu();
-      });
+      link.addEventListener('click', closeMenu);
     });
 
     // 2. 구글 스프레드시트 실시간 연동 및 매거진 디자인 자동 변환 엔진
