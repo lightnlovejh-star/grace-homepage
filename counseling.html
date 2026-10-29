@@ -248,3 +248,33 @@
   </script>
 </body>
 </html>
+
+<!-- 플로팅 Top 버튼 -->
+  <button id="scrollTopBtn" class="scroll-top-btn" aria-label="맨 위로 이동">
+    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+  </button>
+
+  <!-- Top 버튼 제어 스크립트 -->
+  <script>
+    (function() {
+      const topBtn = document.getElementById('scrollTopBtn');
+      if (!topBtn) return;
+
+      window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 350) {
+          topBtn.classList.add('visible');
+        } else {
+          topBtn.classList.remove('visible');
+        }
+      });
+
+      topBtn.addEventListener('click', function() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    })();
+  </script>
